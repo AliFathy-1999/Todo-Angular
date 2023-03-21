@@ -9,3 +9,7 @@
   background-color: #394B6D;
   border-radius: 0.5em;
 }
+.todo-title-style{
+  cursor: pointer;
+}
+

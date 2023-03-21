@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GlobalService } from '../services/global.service';
 type Todo = {
     id:number,
     todo:string,
     completed:boolean,
+}
+type User = {
+  name:string,
+  quote:string,
 }
 @Component({
   selector: 'app-todo',
@@ -10,12 +16,20 @@ type Todo = {
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit{
-  todoStorages:any =  localStorage.getItem("todos");
+  user:User = {
+    name:"",
+    quote:""
+  }
   todos:Todo[] = []
   todoBody:string = ''
   isCompleted :Boolean = false;
   errorMessage:string = ""
-  constructor(){}
+  task:Todo = {id:1,todo:"",completed:false}
+  constructor(public _router:Router,public _global:GlobalService){
+    _global.navbar = true;
+    _global.footer = true;
+    this.user = _global.getUser()
+  }
 
   ngOnInit(): void {}
   addTask(todoBody:string){
@@ -48,5 +62,15 @@ export class TodoComponent implements OnInit{
   deleteTask(id:number){
     const index : number= this.todos.findIndex(todo => todo.id == id)
     this.todos.splice(index,1);
+  }
+  favoriteTask(id:number){
+
+  }
+  sendTaskData(id:number){
+    this._global.task =  this.todos.find(todo => todo.id == id);
+  }
+
+  gotoSingleTask(id:any){
+       this._router.navigate(["/task",id])
   }
 }

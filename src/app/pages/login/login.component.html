@@ -1,0 +1,20 @@
+<main class="form-signin w-100 main">
+  <form>
+    <div class="d-flex justify-content-center">
+      <h1>Todo</h1>
+      <img class="mb-4" src="../../../assets/todoimage.png" alt="" width="72" height="57">
+    </div>
+    <h1 class="h3 mb-3 fw-normal text-center mb-4">Please sign in</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Ali Ahmed" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+      <label for="floatingInput">Enter your name</label>
+    </div>
+    <div class="form-floating mb-5">
+      <p class="mt-4">Enter your favorite Quote</p>
+      <textarea type="text" class="form-control mt-4" [(ngModel)]="quote" [ngModelOptions]="{standalone: true}"></textarea>
+
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" (click)="login(name,quote)">Sign in</button>
+  </form>
+</main>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GlobalService } from './services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todo-list-app';
+  constructor(public _global:GlobalService){
+
+  }
 }
