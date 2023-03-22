@@ -13,7 +13,6 @@ export class TodoComponent implements OnInit{
   @Input() myTodos:any
   completedTask:boolean = false
   @Output() deletedTodoEvent = new EventEmitter<string>();
-
   constructor(public _router:Router,public _global:GlobalService){
     _global.navbar = true;
     _global.footer = true;
@@ -40,16 +39,31 @@ export class TodoComponent implements OnInit{
     });
   }
   deleteTask(id:number){
-    let index : number= this.todos.findIndex(todo => todo.id == id)
-    this.todos.splice(index, 1);
-    const todo = this.todos[index];
-    console.log(todo);
-
-    this.deletedTodoEvent.emit(todo.todo + ' deleted');
+    const todo = this.todos.filter(todo => {
+      if(todo.id == id)
+        todo.isDeleted = true;
+    });
+    // let index : number = this.todos.findIndex(todo => todo.id == id)
+    // this.todos.splice(index, 1);
+    // const todo = this.todos[index];
+    this.deletedTodoEvent.emit(todo + ' deleted');
 
   }
   favoriteTask(id:number){
+    this.todos.forEach(todo => {
+      if(todo.id == id)
+      {
+        todo.isFavorite = true;
+      }
+    });
+    console.log(this.todos);
 
+  }
+  unfavoriteTask(id:number){
+    this.todos.forEach(todo => {
+      if(todo.id == id)
+        todo.isFavorite = false;
+    });
   }
   sendTaskData(id:number){
     this._global.task =  this.todos.find(todo => todo.id == id);

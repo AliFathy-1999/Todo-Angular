@@ -39,8 +39,6 @@ export class TodosComponent {
     }
   }
   handleDelete(todo: Todo) {
-    const index = this.todos.findIndex((t) => t.id === todo.id);
-    this.todos.splice(index, 1);
     this.deletedTodo = todo;
     setTimeout(() => {
       this.deletedTodo = null;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GlobalService } from 'src/app/services/global.service';
+import { GlobalService, Todo } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-favorite-tasks',
@@ -7,7 +7,9 @@ import { GlobalService } from 'src/app/services/global.service';
   styleUrls: ['./favorite-tasks.component.css']
 })
 export class FavoriteTasksComponent {
+  tasks:Todo[] = [{id:1,todo:"",completed:false,isDeleted:false,isFavorite:false}]
   constructor(private _global:GlobalService){
     _global.navbar = true;_global.footer = true
+    this.tasks = _global.getFavoriteTasks()
   }
 }

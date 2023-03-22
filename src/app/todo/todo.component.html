@@ -1,12 +1,12 @@
-<div >
-  <div *ngIf="!myTodos.completed"  class="d-flex container task-container p-2 mb-4" >
+<div>
+  <div *ngIf="!myTodos.completed && !myTodos.isDeleted"  class="d-flex container task-container p-2 mb-4" >
 
     <div class="p-2 w-100">
       <h3 class="m-4 text-light todo-title-style" (click)="sendTaskData(myTodos.id)" routerLink="/task/{{myTodos.id}}" >{{myTodos.todo}}</h3>
     </div>
 
     <div class="p-2 flex-shrink-1">
-      <button (click)="favoriteTask(myTodos.id)" class="btn btn-primary text-light"><i class="bi bi-star fs-2"></i></button>
+      <button (click)="favoriteTask(myTodos.id)" class="btn btn-primary fav-icon-color"><i class="bi bi-star fs-2"></i></button>
     </div>
 
     <div class="p-2 flex-shrink-1">
@@ -14,33 +14,12 @@
     </div>
 
     <div class="p-2 flex-shrink-1">
-      <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-danger text-light"><i class="bi bi-trash3 fs-2"></i></button>
-    </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Todo</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            Do you want to delete this todo ?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" (click)="deleteTask(myTodos.id)" data-bs-dismiss="modal" class="btn btn-danger">Delete</button>
-          </div>
-        </div>
-      </div>
+      <button (click)="deleteTask(myTodos.id)" class="btn btn-danger text-light"><i class="bi bi-trash3 fs-2"></i></button>
     </div>
    </div>
 </div>
 
-<!-- <div  class="d-flex justify-content-center">
-  <h3 class="btn btn-success text-center m-5 text-light fs-3" ><i class="bi bi-check-circle"></i> Completed tasks</h3>
-</div> -->
- <div *ngIf="myTodos.completed">
+ <div *ngIf="myTodos.completed && !myTodos.isDeleted">
 
   <div   class="d-flex container task-container p-2 mb-4" >
     <div class="p-2 w-100">
@@ -54,28 +33,7 @@
     <div class="p-2 flex-shrink-1">
       <button (click)="deleteTask(myTodos.id)"  class="btn btn-danger text-light"><i class="bi bi-trash3 fs-2"></i></button>
     </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Todo</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            Do you want to delete this todo ?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button (click)="deleteTask(myTodos.id)" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
-    <!-- type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-      -->
 
 

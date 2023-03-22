@@ -17,9 +17,18 @@ export class NavbarComponent {
   userLoggedIn:boolean = false
   constructor(public _global:GlobalService){
     this.userLoggedIn = _global.isLoggedIn;
-    this.user = _global.getUser()
+    this.user = _global.getUser();
   }
   logout(){
     this._global.isLoggedIn = false
+  }
+  getCountFavorite(){
+    return this._global.getCountFav();
+  }
+  getCountDelete(){
+    return this._global.getCountDel();
+  }
+  getPercentage(){
+    return this._global.getCompTaskPercent();
   }
 }

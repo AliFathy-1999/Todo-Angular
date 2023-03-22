@@ -25,9 +25,8 @@
     </div>
     <section>
       <app-todo *ngFor="let todo of todos" [myTodos]="todo" (deletedTodoEvent)="handleDelete(todo)"></app-todo>
-      <!--(deletedTodoEvent)="handleDelete(todo)"-->
       <div *ngIf="deletedTodo" class="text-light fs-2 text-center">
-        {{ deletedTodo.todo }} has been deleted.
+        <i class="bi bi-trash3 fs-2 text-success"></i> {{ deletedTodo.todo }} has been deleted.
       </div>
     </section>
   </section>
