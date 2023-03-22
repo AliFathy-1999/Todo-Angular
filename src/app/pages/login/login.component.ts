@@ -24,7 +24,7 @@ export class LoginComponent {
     }
     this._global.user = userData;
     this._global.isLoggedIn = true;
-    this._router.navigate(['/todo'])
+    this._router.navigate(['/todos'])
     console.log(this._global.user);
 
   }

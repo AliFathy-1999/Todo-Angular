@@ -1,12 +1,15 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-type User = {
+export interface User{
   name:string,
   quote:string,
 }
-type Todo = {
+export interface Todo {
   id:number,
   todo:string,
   completed:boolean,
+  isFavorite:boolean,
+  isDeleted:boolean
 }
 @Injectable({
   providedIn: 'root'
@@ -15,10 +18,17 @@ export class GlobalService {
   public isLoggedIn : boolean = false;
   public navbar : boolean = false;
   public footer : boolean = false;
-
-  public user:User = {name:"", quote:""};
   public task:any;
-  constructor() {
+  user:User = {
+    name:"",
+    quote:""
+  }
+  todos:Todo[] = []
+  todoBody:string = ''
+  isCompleted :Boolean = false;
+  errorMessage:string = ""
+  constructor(private _router:Router) {
+
   }
   isAuthenticated(){
     return this.isLoggedIn;
@@ -26,7 +36,9 @@ export class GlobalService {
   getUser(){
     return this.user;
   }
-  getId(id:number){
-    console.log(id);
+  getTasks(){
+    return this.todos;
   }
+
+
 }

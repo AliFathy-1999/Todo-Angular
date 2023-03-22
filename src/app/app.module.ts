@@ -13,6 +13,7 @@ import { FavoriteTasksComponent } from './pages/favorite-tasks/favorite-tasks.co
 import { DeletedTasksComponent } from './pages/deleted-tasks/deleted-tasks.component';
 import { ErrorpageComponent } from './pages/errorpage/errorpage.component';
 import { UserComponent } from './pages/user/user.component';
+import { TodosComponent } from './todos/todos.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserComponent } from './pages/user/user.component';
     DeletedTasksComponent,
     ErrorpageComponent,
     UserComponent,
+    TodosComponent,
   ],
   imports: [
     BrowserModule,

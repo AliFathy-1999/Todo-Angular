@@ -1,51 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit,Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalService } from '../services/global.service';
-type Todo = {
-    id:number,
-    todo:string,
-    completed:boolean,
-}
-type User = {
-  name:string,
-  quote:string,
-}
+import { GlobalService, User,Todo } from '../services/global.service';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit{
-  user:User = {
-    name:"",
-    quote:""
-  }
-  todos:Todo[] = []
-  todoBody:string = ''
-  isCompleted :Boolean = false;
-  errorMessage:string = ""
-  task:Todo = {id:1,todo:"",completed:false}
+  user:User
+  errorMessage:string =""
+  todos:Todo[]=[]
+  @Input() myTodos:any
+  completedTask:boolean = false
+  @Output() deletedTodoEvent = new EventEmitter<string>();
+
   constructor(public _router:Router,public _global:GlobalService){
     _global.navbar = true;
     _global.footer = true;
     this.user = _global.getUser()
+    this.todos = _global.getTasks()
+    this.errorMessage = this._global.errorMessage;
   }
 
   ngOnInit(): void {}
-  addTask(todoBody:string){
-    let task:Todo = {
-      id:Date.now(),
-      todo:todoBody,
-      completed:false,
-    }
-    if(task.todo.length != 0){
-      this.todos.push(task)
-      this.errorMessage = ""
-    }
-    else{
-      this.errorMessage = "Invalid Input"
-    }
 
+  getTasks(){
+    return this.todos;
   }
   completeTask(id:number){
     this.todos.forEach(todo => {
@@ -60,8 +40,13 @@ export class TodoComponent implements OnInit{
     });
   }
   deleteTask(id:number){
-    const index : number= this.todos.findIndex(todo => todo.id == id)
-    this.todos.splice(index,1);
+    let index : number= this.todos.findIndex(todo => todo.id == id)
+    this.todos.splice(index, 1);
+    const todo = this.todos[index];
+    console.log(todo);
+
+    this.deletedTodoEvent.emit(todo.todo + ' deleted');
+
   }
   favoriteTask(id:number){
 
@@ -73,4 +58,5 @@ export class TodoComponent implements OnInit{
   gotoSingleTask(id:any){
        this._router.navigate(["/task",id])
   }
+
 }
