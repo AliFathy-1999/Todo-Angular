@@ -55,11 +55,8 @@ export class GlobalService {
     return count.length;
   }
   getCompTaskPercent(){
-    const TasksLen = this.todos.filter(todo => todo).length
-    console.log("TasksLen : " + TasksLen)
-    const compTasksLen : number = this.todos.filter(todo => todo.completed == true).length
-    console.log("compTasksLen : " + compTasksLen)
-    //console.log(((compTasksLen/TasksLen)*100).toFixed(2));
+    const TasksLen = this.todos.filter(todo => todo.isDeleted == false).length
+    const compTasksLen : number = this.todos.filter(todo => todo.completed == true && todo.isDeleted == false).length
     if(TasksLen)
       return ((compTasksLen/TasksLen)*100).toFixed(2);
     else

@@ -13,11 +13,10 @@ import { TodosComponent } from './todos/todos.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
-  //{path:'todo', component:TodoComponent}, // ,canActivate:[AuthGuard]
   {path:'todos', component:TodosComponent,canActivate:[AuthGuard]},
-  {path:'favtask', component:FavoriteTasksComponent},
-  {path:'deltask', component:DeletedTasksComponent},
-  {path:'task/:id', component:SingleTaskComponent,canActivate:[AuthGuard]},//canActivate:[AuthGuard]
+  {path:'favtask', component:FavoriteTasksComponent,canActivate:[AuthGuard]},
+  {path:'deltask', component:DeletedTasksComponent,canActivate:[AuthGuard]},
+  {path:'task/:id', component:SingleTaskComponent,canActivate:[AuthGuard]},
   {path:"**",component:ErrorpageComponent},
 ];
 

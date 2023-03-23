@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TodoComponent } from './todo/todo.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SingleTaskComponent } from './pages/single-task/single-task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FavoriteTasksComponent } from './pages/favorite-tasks/favorite-tasks.component';
@@ -32,7 +32,8 @@ import { TodosComponent } from './todos/todos.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
