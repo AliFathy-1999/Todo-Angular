@@ -14,6 +14,8 @@ import { DeletedTasksComponent } from './pages/deleted-tasks/deleted-tasks.compo
 import { ErrorpageComponent } from './pages/errorpage/errorpage.component';
 import { UserComponent } from './pages/user/user.component';
 import { TodosComponent } from './todos/todos.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { TodosComponent } from './todos/todos.component';
     ErrorpageComponent,
     UserComponent,
     TodosComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+     HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

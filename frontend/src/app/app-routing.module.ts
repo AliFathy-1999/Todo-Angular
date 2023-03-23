@@ -10,13 +10,15 @@ import { SingleTaskComponent } from './pages/single-task/single-task.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { GlobalService } from './services/global.service';
 import { TodosComponent } from './todos/todos.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
+  {path:'register', component:RegisterComponent},
   {path:'', component:LoginComponent},
-  {path:'todos', component:TodosComponent,canActivate:[AuthGuard]},
-  {path:'favtask', component:FavoriteTasksComponent,canActivate:[AuthGuard]},
-  {path:'deltask', component:DeletedTasksComponent,canActivate:[AuthGuard]},
-  {path:'task/:id', component:SingleTaskComponent,canActivate:[AuthGuard]},
+  {path:'todos', component:TodosComponent},//,canActivate:[AuthGuard]
+  {path:'favtask', component:FavoriteTasksComponent}, //,canActivate:[AuthGuard]
+  {path:'deltask', component:DeletedTasksComponent},
+  {path:'task/:id', component:SingleTaskComponent},
   {path:"**",component:ErrorpageComponent},
 ];
 

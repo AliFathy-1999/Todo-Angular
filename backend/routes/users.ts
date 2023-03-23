@@ -7,7 +7,7 @@ const asycnWrapper = require('../lib/index');
 const Users = require('../DB/models/user');
 const userAuth = require("../middlewares/userAuth");
 
-router.post("/",async (req:Request,res:Response, next:NextFunction) => {
+router.post("/register",async (req:Request,res:Response, next:NextFunction) => {
     const { body: { fullName, email, password } } = req;    
     const user = userController.create({fullName, email, password});
     const [err, data] = await asycnWrapper(user);

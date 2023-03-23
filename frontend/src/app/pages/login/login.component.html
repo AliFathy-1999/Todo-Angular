@@ -1,5 +1,5 @@
 <main class="form-signin w-100 main">
-  <form>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
     <div class="d-flex justify-content-center">
       <h1>Todo</h1>
       <img class="mb-4" src="../../../assets/todoimage.png" alt="" width="72" height="57">
@@ -7,14 +7,20 @@
     <h1 class="h3 mb-3 fw-normal text-center mb-4">Please sign in</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Ali Ahmed" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
-      <label for="floatingInput">Enter your name</label>
+      <input type="email" class="form-control" id="floatingInput" formControlName="email">
+      <label for="floatingInput">Enter your email</label>
+    </div>
+    <div class="text-danger fs-5" *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)">
+      <i class="bi bi-exclamation-triangle-fill "></i> Invalid Email.
     </div>
     <div class="form-floating mb-5">
-      <p class="mt-4">Enter your favorite Quote</p>
-      <textarea type="text" class="form-control mt-4" [(ngModel)]="quote" [ngModelOptions]="{standalone: true}"></textarea>
-
+      <input type="password" class="form-control" id="floatingInput" formControlName="password">
+      <label for="floatingInput">Enter your password </label>
+      <div class="text-danger fs-5" *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)">
+        <i class="bi bi-exclamation-triangle-fill "></i> Invalid password.
+      </div>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" (click)="login(name,quote)">Sign in</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <p class="text-center mt-4 text-primary">Don't have an account? <a routerLink="/register" class="btn btn-warning"><i class="bi bi-box-arrow-in-right"></i> Register</a></p>
   </form>
 </main>

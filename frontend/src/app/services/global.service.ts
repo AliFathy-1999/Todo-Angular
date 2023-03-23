@@ -1,9 +1,13 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 export interface User{
-  name:string,
-  quote:string,
+  fullName?:string,
+  email:string,
+  password:string,
 }
+
 export interface Todo {
   id:number,
   todo:string,
@@ -20,17 +24,25 @@ export class GlobalService {
   public footer : boolean = false;
   public task:any;
   public countFavTasks:number = 0;
-  user:User = {
-    name:"",
-    quote:""
-  }
+  user:any;
+  url:string="http://localhost:5005/users/"
+
   todos:Todo[] = []
   todoBody:string = ''
   isCompleted :Boolean = false;
   errorMessage:string = ""
-  constructor(private _router:Router) {
+  constructor(private _router:Router,private http:HttpClient) {
 
   }
+  login(user:User){
+    return this.http.post(`${this.url}login`,user);
+  }
+  register(user:User){
+    return this.http.post(`${this.url}register`,user);
+  }
+  // myTasks():Todo[]{
+  //   return
+  // }
   isAuthenticated(){
     return this.isLoggedIn;
   }
