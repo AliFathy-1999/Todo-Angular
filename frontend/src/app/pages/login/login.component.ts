@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { GlobalService } from 'src/app/services/global.service';
 type User = {
   name:string,
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   name:string="";
   quote:string="";
   errorMessage:string="";
-  constructor(public _global:GlobalService,public _router:Router){
+  constructor(public _global:GlobalService,public _router:Router,private cookieService: CookieService){
     _global.navbar=false;
     _global.footer=false;
   }
@@ -37,12 +38,11 @@ export class LoginComponent implements OnInit {
 
   }
   onSubmit(form: FormGroup) {
-    this._global.login(form.value).subscribe(user => {
-      console.log(user);
+    this._global.login(form.value).subscribe((user:any) => {
+      this.cookieService.set('token', user.token);
       this._router.navigate(['/todos']);
     },(err:Error)=>{
-      console.log(err.message);
-      this.errorMessage = err.message;
+      this.errorMessage = "Invalid email or password";
     })
   }
 }

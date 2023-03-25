@@ -1,47 +1,48 @@
 import { GlobalService, User,Todo } from 'src/app/services/global.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.css']
 })
-export class TodosComponent {
-  user:User
+export class TodosComponent implements OnInit {
   errorMessage:string =""
   todoBody:string=""
   todos:Todo[] = []
   deletedMessage:string="";
   deletedTodo: Todo | null = null;
-
+  isLoading:boolean = false
+  todoForm: FormGroup = new FormGroup({
+    todo:new FormControl('' , [Validators.required , Validators.minLength(5),Validators.maxLength(150)]),
+  })
   constructor(private  _global:GlobalService){
     _global.navbar = true;
     _global.footer = true;
-    this.user = _global.getUser()
-    this.todos = _global.getTasks()
   }
-  addTask(todoBody:string){
-    let task:Todo = {
-      id:Date.now(),
-      todo:todoBody,
-      completed:false,
-      isFavorite:false,
-      isDeleted:false
-    }
-    if(task.todo.length != 0){
-      this.todos.push(task)
-      this._global.todos = this.todos
-      console.log(this._global.todos);
-      this.errorMessage = ""
-    }
-    else{
-      this.errorMessage = "Invalid Input"
-    }
+  ngOnInit(): void {
+    this._global.myTasks().subscribe((tasks:any) =>{
+      this.todos = tasks;
+      this.isLoading = false
+    },(err:Error)=>{
+      this.isLoading = true
+      //location.reload()
+    },()=>{
+
+    })
   }
-  handleDelete(todo: Todo) {
-    this.deletedTodo = todo;
-    setTimeout(() => {
-      this.deletedTodo = null;
-    }, 3000);
+  addTask(form: FormGroup){
+    this._global.addTasks(form.value).subscribe((tasks:any) =>{
+        this.ngOnInit();
+    },(err:Error)=>{
+        //location.reload()
+    })
   }
+  // handleDelete(todo: Todo) {
+  //   this.deletedTodo = todo;
+  //   setTimeout(() => {
+  //     this.deletedTodo = null;
+  //   }, 3000);
+  // }
 }

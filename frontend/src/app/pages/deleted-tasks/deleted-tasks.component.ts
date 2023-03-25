@@ -1,15 +1,20 @@
 import { GlobalService, Todo } from 'src/app/services/global.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-deleted-tasks',
   templateUrl: './deleted-tasks.component.html',
   styleUrls: ['./deleted-tasks.component.css']
 })
-export class DeletedTasksComponent {
-  tasks:Todo[] = [{id:1,todo:"",completed:false,isDeleted:false,isFavorite:false}]
+export class DeletedTasksComponent implements OnInit{
+  tasks:Todo[] = [{_id:1,todo:"",completed:false,isDeleted:false,isFavorite:false}]
   constructor(private _global:GlobalService){
     _global.navbar = true;_global.footer = true
-    this.tasks = _global.getDeletedTasks();
+  }
+  ngOnInit(): void {
+    this._global.getDeletedTasks().subscribe((task:any) =>{
+      this.tasks = task
+      this._global.delCount = this.tasks.length
+    })
   }
 }

@@ -15,8 +15,9 @@ import { ErrorpageComponent } from './pages/errorpage/errorpage.component';
 import { UserComponent } from './pages/user/user.component';
 import { TodosComponent } from './todos/todos.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UserInterceptorInterceptor } from './interceptor/user-interceptor.interceptor';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,12 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
      HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: UserInterceptorInterceptor, multi:true
+    },
+    CookieService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

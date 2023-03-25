@@ -20,7 +20,7 @@ export class RegisterComponent {
     this._global.register(this.user).subscribe(user => {
       console.log("Registered Successfully");
 
-      this._router.navigate(['/']);
+      this._router.navigate(['/login']);
     },(err:Error)=>{
       console.log(err.message);
       this.errorMessage = err.message;

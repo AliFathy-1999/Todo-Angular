@@ -13,12 +13,13 @@ import { TodosComponent } from './todos/todos.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'register', component:RegisterComponent},
-  {path:'', component:LoginComponent},
-  {path:'todos', component:TodosComponent},//,canActivate:[AuthGuard]
-  {path:'favtask', component:FavoriteTasksComponent}, //,canActivate:[AuthGuard]
-  {path:'deltask', component:DeletedTasksComponent},
-  {path:'task/:id', component:SingleTaskComponent},
+  {path:'login', component:LoginComponent},
+  {path:'todos', component:TodosComponent,canActivate:[AuthGuard]},//,canActivate:[AuthGuard]
+  {path:'favtask', component:FavoriteTasksComponent,canActivate:[AuthGuard]}, //,canActivate:[AuthGuard]
+  {path:'deltask', component:DeletedTasksComponent,canActivate:[AuthGuard]},
+  {path:'task/:id', component:SingleTaskComponent,canActivate:[AuthGuard]},
   {path:"**",component:ErrorpageComponent},
 ];
 

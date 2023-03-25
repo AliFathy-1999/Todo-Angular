@@ -4,10 +4,9 @@
   background-attachment: fixed;
   background-size: contain;
   height: max-content;
-}
-.task-container{
-  background-color: #394B6D;
-  border-radius: 0.5em;
+  border: 0;
+  box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
 }
 .todo-title-style{
   cursor: pointer;

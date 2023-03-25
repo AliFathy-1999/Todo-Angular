@@ -1,22 +1,23 @@
-<!-- <div class="todos-cont">
+ <div class="todos-cont">
   <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="../../assets/quote.png" alt="" width="72" height="57">
     <h1 class="display-5 fw-bold">Your favorite quote</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">{{user.quote || "Lorem ipsum dolor sit amet consectetur, adipiscing elit interdum."}}</p>
+      <p class="lead mb-4">Lorem ipsum dolor sit amet consectetur, adipiscing elit interdum."</p>
     </div>
   </div>
   <section class="todo-container container my-4 border border-dark rounded-2 mt-5">
     <h3 class="text-center text-dark p-3">So What We Gonna Do ? </h3>
-    <div class="d-flex m-5">
-      <input class="form-control form-control-lg me-2" type="text" placeholder="Enter Task" [(ngModel)]="todoBody">
-      <button (click)="addTask(todoBody)" class="btn btn-primary "><i class="bi bi-plus-circle-fill fs-2"></i></button>
-    </div>
-    <div class="d-flex justify-content-center">
-      <div class="alert alert-danger w-50" *ngIf="errorMessage">
-        <h3  class="text-center p-1"><i class="bi bi-exclamation-triangle-fill"></i> {{errorMessage}}</h3>
+    <form class="d-flex m-5"  [formGroup]="todoForm" (ngSubmit)="addTask(todoForm)">
+      <input class="form-control form-control-lg me-2" type="text" placeholder="Enter Task" formControlName="todo">
+      <button type="submit" [disabled]="!todoForm.valid" class="btn btn-primary "><i class="bi bi-plus-circle-fill fs-2"></i></button>
+    </form>
+    <div class="d-flex justify-content-center" *ngIf="todoForm.get('todo')?.invalid && (todoForm.get('todo')?.dirty || todoForm.get('todo')?.touched)">
+      <div class="text-bg-danger fs-4 p-2 rounded-2 w-50 text-center" >
+        <i class="bi bi-exclamation-triangle-fill "></i> Invalid todo. todo must be at least 5 characters and maxmium is 150
       </div>
     </div>
+
     <h3 class="text-center m-5"><i class="bi bi-list-task"></i> Todo tasks</h3>
     <div class="d-flex justify-content-center">
       <div class="alert alert-info w-25" *ngIf="(todos.length == 0)">
@@ -24,14 +25,20 @@
       </div>
     </div>
     <section>
-      <app-todo *ngFor="let todo of todos" [myTodos]="todo" (deletedTodoEvent)="handleDelete(todo)"></app-todo>
-      <div *ngIf="deletedTodo" class="text-light fs-2 text-center">
-        <i class="bi bi-trash3 fs-2 text-success"></i> {{ deletedTodo.todo }} has been deleted.
+      <app-todo *ngFor="let todo of todos" [myTodos]="todo"></app-todo>
+      <!--(deletedTodoEvent)="handleDelete(todo)"-->
+      <div class="text-center" *ngIf="isLoading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
+      <!-- <div *ngIf="deletedTodo" class="text-light fs-2 text-center">
+        <i class="bi bi-trash3 fs-2 text-success"></i> {{ deletedTodo.todo }} has been deleted.
+      </div> -->
     </section>
   </section>
 </div>
 
 
 
- -->
+
