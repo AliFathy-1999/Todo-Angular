@@ -18,6 +18,10 @@ const schema = new Schema<Todo>({
         type:Schema.Types.ObjectId,
         required:true,
     },  
+    completed:{
+        type:Boolean,
+        default:false,        
+    },
     isDeleted:{
         type:Boolean,
         default:false,

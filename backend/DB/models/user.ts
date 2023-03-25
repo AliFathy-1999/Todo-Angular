@@ -53,7 +53,9 @@ schema.statics.login = async function(email,password){
 }
 schema.methods.generateToken = async function(){
     const user = this;
-    const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET)
+    const token = jwt.sign({_id:user._id},process.env.TOKEN_SECRET,{
+        expiresIn: process.env.JWT_EXPIRES_IN,
+      })
     return token;
 }
 const User = model("Users",schema);

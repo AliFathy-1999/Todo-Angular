@@ -25,14 +25,69 @@ router.post("/",userAuth,async (req:any,res:Response, next:NextFunction) => {
 })
 
 router.get("/",userAuth,async (req:any,res:Response, next:NextFunction) => {
-    const todos = todosController.getUserTodos(req.user._id);
+    const todos  = todosController.getUserTodos(req.user._id);    
     const [err, data] = await asycnWrapper(todos);
     if (err) return next(err);
     res.status(200).json(data);
 })
 router.patch("/deletetodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
     const { params:{ id } } = req;
-    const todo = todosController.deleteById(req.user,id);
+    const userId = req.user._id
+    const todo = todosController.deleteTodo(userId,id);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.patch("/favoritetodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const { params:{ id } } = req;
+    const userId = req.user._id
+    const todo = todosController.favoriteTodo(userId,id);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.patch("/unfavoritetodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const { params:{ id } } = req;
+    const userId = req.user._id
+    const todo = todosController.unFavoriteTodo(userId,id);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.patch("/completetodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const { params:{ id } } = req;
+    const userId = req.user._id
+    const todo = todosController.completeTodo(userId,id);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.patch("/uncompletetodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const { params:{ id } } = req;
+    const userId = req.user._id
+    const todo = todosController.uncompleteTodo(userId,id);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.get("/favoritetodo", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const userId = req.user._id
+    const todo = todosController.myFavoriteTodo(userId);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.get("/completedtodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const { params:{ id } } = req;
+    const userId = req.user._id
+    const todo = todosController.completedTodo(userId,id);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.get("/deletedtodo", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const userId = req.user._id
+    const todo = todosController.myDeletedTodo(userId);
     const [err, data] = await asycnWrapper(todo);
     if (err) return next(err);
     res.status(200).json(data);

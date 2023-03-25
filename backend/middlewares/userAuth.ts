@@ -9,7 +9,7 @@ const userAuth = async (req:any,res:Response,next:NextFunction)=>{
         if(!user){
             throw new Error('User Not Found')
         }
-        req.user = user;    
+        req.user = user;            
         next()
     }catch(e:any){
         res.status(500).send({

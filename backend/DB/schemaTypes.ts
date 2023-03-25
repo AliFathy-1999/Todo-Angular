@@ -8,6 +8,7 @@ type Todo = {
   _id:number,
   todo:string,
   userId:mongoose.Types.ObjectId,
+  completed:boolean,
   isDeleted:boolean,
   isFavorite:boolean
 }
