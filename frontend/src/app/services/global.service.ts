@@ -32,52 +32,55 @@ export class GlobalService {
   isCompleted :Boolean = false;
   errorMessage:string = ""
   delCount:number = 0
+  favCountSubject = new BehaviorSubject<number>(0);
+  count$ = this.favCountSubject.asObservable();
+  delCountSubject = new BehaviorSubject<number>(0);
+  delcount$ = this.delCountSubject.asObservable();
   constructor(private _router:Router,private http:HttpClient) {
 
   }
-  login(user:User){
+  countFav(count:number){
+    this.favCountSubject.next(count);
+  }
+  countDel(count:number){
+    this.delCountSubject.next(count);
+  }
+  login(user:User):Observable<any>{
     return this.http.post(`${this.url}login`,user);
   }
-  register(user:User){
+  register(user:User):Observable<any>{
     return this.http.post(`${this.url}register`,user);
   }
-  getMe(){
+  getMe():Observable<any>{
     return this.http.get(`${this.url}me`);
   }
-  myTasks(){
+  myTasks():Observable<any>{
     return this.http.get(`${this.todourl}`);
   }
-  addTasks(todo:any){
+  addTasks(todo:any):Observable<any>{
     return this.http.post(`${this.todourl}`,todo);
   }
-  deleteTask(id:number){
+  deleteTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}deletetodo/${id}`,null)
   }
-  completeTask(id:number){
+  completeTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}completetodo/${id}`,null)
   }
-  unCompleteTask(id:number){
+  unCompleteTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}uncompletetodo/${id}`,null)
   }
-  favTask(id:number){
+  favTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}favoritetodo/${id}`,null)
   }
-  unFavTask(id:number){
+  unFavTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}unfavoritetodo/${id}`,null)
   }
-  getDeletedTasks(){
+  getDeletedTasks():Observable<any>{
     return this.http.get(`${this.todourl}deletedtodo`)
   }
-  getFavoriteTasks(){
+  getFavoriteTasks():Observable<any>{
     return this.http.get(`${this.todourl}favoritetodo/`)
   }
-  getCountFav(){
-    const count = this.todos.filter(todo => todo.isFavorite == true)
-    return count.length;
-  }
-  // getCountDel(){
-  //   return this.delCount;
-  // }
   getCompTaskPercent(){
     const TasksLen = this.todos.filter(todo => todo.isDeleted == false).length
     const compTasksLen : number = this.todos.filter(todo => todo.completed == true && todo.isDeleted == false).length

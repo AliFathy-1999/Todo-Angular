@@ -12,7 +12,7 @@
         <li class="nav-item" >
           <a class="nav-link position-relative" [routerLink]="['/favtask']" routerLinkActive="text-warning">
               <span class="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">
-                {{getCountFavorite()}}
+                {{favcount}}
               <span class="visually-hidden"></span>
               </span>
             <i class="bi bi-star-fill fs-2"></i>
@@ -21,7 +21,8 @@
         <li class="nav-item" >
           <a class="nav-link position-relative" [routerLink]="['/deltask']" routerLinkActive="text-danger">
               <span class="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">
-                0
+                {{delcount}}
+                <!-- {{getCountDelete()}} -->
               <span class="visually-hidden"></span>
               </span>
             <i class="bi bi-trash3 fs-2"></i>
@@ -37,14 +38,14 @@
       <span class="navbar-text d-flex p-2">
         <img src="../../../assets/userAvatar.png" alt="user logo" width="40" class="me-4">
         <ng-container *ngIf="isLoading">
-          <div class="text-center ms-4 " >
+          <div class="text-center ms-4 me-5 " >
             <div class="spinner-border text-primary" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
         </ng-container>
 
-        <h4 class="mt-2 me-4" *ngIf="!isLoading">{{userName}}</h4>
+        <h4 class="mt-2 me-4" *ngIf="!isLoading">{{fullName}}</h4>
         <button [ngStyle]="{'display': userLoggedIn ? 'none' : 'block' }" class="btn btn-primary" [routerLink]="['/']"><i class="bi bi-box-arrow-left"></i> Login</button>
         <button [ngStyle]="{'display': userLoggedIn ? 'block' : 'none' }" class="btn btn-danger" (click)="logout()"><i class="bi bi-box-arrow-right"></i> Logout</button>
       </span>

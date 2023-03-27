@@ -7,14 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deleted-tasks.component.css']
 })
 export class DeletedTasksComponent implements OnInit{
+  count = 0
   tasks:Todo[] = [{_id:1,todo:"",completed:false,isDeleted:false,isFavorite:false}]
   constructor(private _global:GlobalService){
     _global.navbar = true;_global.footer = true
   }
   ngOnInit(): void {
+
     this._global.getDeletedTasks().subscribe((task:any) =>{
       this.tasks = task
-      this._global.delCount = this.tasks.length
+      this._global.countDel(task.length)
+    },(err:Error) => {
+      this.ngOnInit()
     })
   }
 }

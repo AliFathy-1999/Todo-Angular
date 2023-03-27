@@ -11,10 +11,19 @@ export class FavoriteTasksComponent implements OnInit{
   constructor(private _global:GlobalService){
     _global.navbar = true;_global.footer = true
   }
+
   ngOnInit(): void {
-    this._global.getFavoriteTasks().subscribe((tasks:any) => this.tasks = tasks)
+    this._global.getFavoriteTasks().subscribe((tasks:any) => {
+      this._global.countFav(tasks.length)
+      this.tasks = tasks
+    },(err:Error) => {
+      this.ngOnInit()
+    })
   }
   unFavorite(id:number){
-    this._global.unFavTask(id).subscribe((tasks:any) => location.reload())
+    this._global.unFavTask(id).subscribe((tasks:any) => {
+
+      this.ngOnInit()
+  })
   }
 }

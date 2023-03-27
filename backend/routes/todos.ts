@@ -87,7 +87,15 @@ router.get("/completedtodo/:id", userAuth ,async (req:any,res:Response, next:Nex
 })
 router.get("/deletedtodo", userAuth ,async (req:any,res:Response, next:NextFunction) => {
     const userId = req.user._id
-    const todo = todosController.myDeletedTodo(userId);
+    const todo = todosController.myDeletedTodo(userId);   
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
+router.get("/singletodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const { params:{ id } } = req;
+    const userId = req.user._id
+    const todo = todosController.singleTodo(userId,id);
     const [err, data] = await asycnWrapper(todo);
     if (err) return next(err);
     res.status(200).json(data);

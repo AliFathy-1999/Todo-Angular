@@ -28,9 +28,6 @@ export class TodoComponent implements OnInit{
     })
   }
 
-  getTasks(){
-    return this.todos;
-  }
   completeTask(id:number){
     this._global.completeTask(id).subscribe((tasks:any) =>{
       location.reload()
@@ -58,17 +55,9 @@ export class TodoComponent implements OnInit{
   }
   favoriteTask(id:number){
     this._global.favTask(id).subscribe((todo:any)=>{
-      console.log("favorite task");
       location.reload()
     })
-
   }
-  // unfavoriteTask(id:number){
-  //   this.todos.forEach(todo => {
-  //     if(todo.id == id)
-  //       todo.isFavorite = false;
-  //   });
-  // }
   sendTaskData(id:number){
     //this._global.task =  this.todos.find(todo => todo.id == id);
   }

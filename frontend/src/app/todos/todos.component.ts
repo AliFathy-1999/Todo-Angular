@@ -17,13 +17,22 @@ export class TodosComponent implements OnInit {
   todoForm: FormGroup = new FormGroup({
     todo:new FormControl('' , [Validators.required , Validators.minLength(5),Validators.maxLength(150)]),
   })
+  favLength:number=0;
+  delLength:number=0;
   constructor(private  _global:GlobalService){
     _global.navbar = true;
     _global.footer = true;
   }
   ngOnInit(): void {
     this._global.myTasks().subscribe((tasks:any) =>{
+      this._global.todos = tasks;
       this.todos = tasks;
+      this.favLength = this.todos.filter((todo:any) => todo.isFavorite == true).length
+      this._global.countFav(this.favLength);
+      this.delLength = this.todos.filter((todo:any) => todo.isDeleted == true).length
+      console.log(this.delLength);
+
+      this._global.countDel(this.delLength);
       this.isLoading = false
     },(err:Error)=>{
       this.isLoading = true

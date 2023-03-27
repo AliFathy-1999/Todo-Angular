@@ -4,11 +4,9 @@
     <div class="p-2 w-100">
       <h3 class="m-4 text-light todo-title-style" (click)="sendTaskData(myTodos._id)" routerLink="/task/{{myTodos._id}}" >{{myTodos.todo}}</h3>
     </div>
-
     <div class="p-2 flex-shrink-1">
-      <button (click)="favoriteTask(myTodos._id)" class="btn btn-primary fav-icon-color"><i class="bi bi-star fs-2"></i></button>
+      <button (click)="favoriteTask(myTodos._id)" class="btn btn-primary fav-icon-color"><i [ngClass]="myTodos.isFavorite ? 'text-warning' : 'text-light' " class="bi bi-star-fill fs-2"></i></button>
     </div>
-
     <div class="p-2 flex-shrink-1">
       <button  (click)="completeTask(myTodos._id)" class="btn btn-success text-light"><i class="bi bi-check-circle fs-2"></i></button>
     </div>
@@ -25,7 +23,6 @@
     <div class="p-2 w-100">
       <h3 class="m-4 text-light text-decoration-line-through text-success" (click)="sendTaskData(myTodos._id)" routerLink="/task/{{myTodos._id}}">{{myTodos.todo}}</h3>
     </div>
-
     <div class="p-2 flex-shrink-1">
       <button (click)="unCompleteTask(myTodos._id)" class="btn btn-primary text-light"><i class="bi bi-arrow-counterclockwise fs-2"></i></button>
     </div>

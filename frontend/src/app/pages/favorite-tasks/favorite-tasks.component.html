@@ -21,6 +21,9 @@
       </div>
     </a>
   </div>
+  <div class="alert alert-info" role="alert" *ngIf="tasks.length == 0">
+    <i class="bi bi-info-circle"></i> No favorite tasks were found
+  </div>
   </div>
 </div>
 

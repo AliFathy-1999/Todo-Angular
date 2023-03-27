@@ -16,8 +16,9 @@ export class NavbarComponent implements OnInit {
   fullName:string = ""
   userLoggedIn:boolean = false
   token:any;
-  userName:any = localStorage.getItem('userName');
   isLoading:Boolean = false
+  favcount = 0
+  delcount = 0
   constructor(public _global:GlobalService,private cookieService: CookieService,
     public loadingService:LoadingService,private router:Router){
     this.token = this.cookieService.get('token');
@@ -25,11 +26,17 @@ export class NavbarComponent implements OnInit {
       this.userLoggedIn = true;
   }
   ngOnInit(): void {
+    this._global.count$.subscribe((count:any) => {
+      this.favcount = count;
+    });
+    this._global.delcount$.subscribe((count:any) => {
+      this.delcount = count;
+    });
     this._global.getMe().subscribe((user:any) =>{
       this.isLoading  = false;
-       this.userName =  user.fullName;
+      this.fullName =  user.fullName;
     },(err:Error)=>{
-       this.isLoading  = true;
+      this.isLoading  = true;
       location.reload();
     })
  // }
@@ -38,12 +45,6 @@ export class NavbarComponent implements OnInit {
   logout(){
     this.cookieService.delete("token")
     this.router.navigate(['/login']);
-  }
-  getCountFavorite(){
-    return this._global.getCountFav();
-  }
-  getCountDelete(){
-    return this._global.delCount;
   }
   getPercentage(){
     return this._global.getCompTaskPercent();

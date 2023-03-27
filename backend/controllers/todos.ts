@@ -16,10 +16,10 @@ const deleteTodo  = (userId:ObjectId,id:number) => {
     return Todos.findOneAndUpdate({
         $and:[
             {_id: id},
-            {userId:userId}
+            {userId}
         ],
     },
-        {isDeleted:true},{new:true}
+        {isDeleted:true},{isFavorite:false},{completed:false},{new:true}
     )
  }
  const favoriteTodo = (userId:ObjectId,id:number) => { 
@@ -93,6 +93,14 @@ const myDeletedTodo = (userId:ObjectId) => {
         ]
     });
 }
+const singleTodo = (userId:ObjectId,id:number) => {
+    return Todos.findOne({
+        $and:[
+            {userId},
+            {_id:id}
+        ]
+    });
+}
 module.exports = {
     create,
     getUserTodos,
@@ -103,5 +111,6 @@ module.exports = {
     uncompleteTodo,
     myFavoriteTodo,
     myCompletedTodo,
-    myDeletedTodo
+    myDeletedTodo,
+    singleTodo
 }
