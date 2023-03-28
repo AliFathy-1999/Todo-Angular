@@ -22,14 +22,10 @@ export class GlobalService {
   public isLoggedIn : boolean = false;
   public navbar : boolean = false;
   public footer : boolean = false;
-  public task:any;
   public countFavTasks:number = 0;
-  user:any;
   url:string = "http://localhost:5005/users/"
   todourl:string = "http://localhost:5005/todos/"
   todos:Todo[] = []
-  todoBody:string = ''
-  isCompleted :Boolean = false;
   errorMessage:string = ""
   delCount:number = 0
   favCountSubject = new BehaviorSubject<number>(0);
@@ -63,6 +59,9 @@ export class GlobalService {
   deleteTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}deletetodo/${id}`,null)
   }
+  unDeleteTask(id:number):Observable<any>{
+    return this.http.patch(`${this.todourl}undeletetodo/${id}`,null)
+  }
   completeTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}completetodo/${id}`,null)
   }
@@ -74,6 +73,9 @@ export class GlobalService {
   }
   unFavTask(id:number):Observable<any>{
     return this.http.patch(`${this.todourl}unfavoritetodo/${id}`,null)
+  }
+  getSingleTask(id:number):Observable<any>{
+    return this.http.get(`${this.todourl}singletodo/${id}`)
   }
   getDeletedTasks():Observable<any>{
     return this.http.get(`${this.todourl}deletedtodo`)

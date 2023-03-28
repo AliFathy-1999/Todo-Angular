@@ -1,4 +1,3 @@
-import { LoadingService } from './../../services/loading.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,8 +18,7 @@ export class NavbarComponent implements OnInit {
   isLoading:Boolean = false
   favcount = 0
   delcount = 0
-  constructor(public _global:GlobalService,private cookieService: CookieService,
-    public loadingService:LoadingService,private router:Router){
+  constructor(public _global:GlobalService,private cookieService: CookieService,private router:Router){
     this.token = this.cookieService.get('token');
     if(this.token)
       this.userLoggedIn = true;

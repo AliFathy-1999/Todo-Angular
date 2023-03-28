@@ -30,15 +30,10 @@ export class TodosComponent implements OnInit {
       this.favLength = this.todos.filter((todo:any) => todo.isFavorite == true).length
       this._global.countFav(this.favLength);
       this.delLength = this.todos.filter((todo:any) => todo.isDeleted == true).length
-      console.log(this.delLength);
-
       this._global.countDel(this.delLength);
       this.isLoading = false
     },(err:Error)=>{
       this.isLoading = true
-      //location.reload()
-    },()=>{
-
     })
   }
   addTask(form: FormGroup){

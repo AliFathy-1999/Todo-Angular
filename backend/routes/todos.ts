@@ -38,6 +38,14 @@ router.patch("/deletetodo/:id", userAuth ,async (req:any,res:Response, next:Next
     if (err) return next(err);
     res.status(200).json(data);
 })
+router.patch("/undeletetodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
+    const { params:{ id } } = req;
+    const userId = req.user._id
+    const todo = todosController.unDeleteTodo(userId,id);
+    const [err, data] = await asycnWrapper(todo);
+    if (err) return next(err);
+    res.status(200).json(data);
+})
 router.patch("/favoritetodo/:id", userAuth ,async (req:any,res:Response, next:NextFunction) => {
     const { params:{ id } } = req;
     const userId = req.user._id

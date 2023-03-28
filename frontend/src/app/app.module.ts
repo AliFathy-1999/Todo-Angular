@@ -12,7 +12,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { FavoriteTasksComponent } from './pages/favorite-tasks/favorite-tasks.component';
 import { DeletedTasksComponent } from './pages/deleted-tasks/deleted-tasks.component';
 import { ErrorpageComponent } from './pages/errorpage/errorpage.component';
-import { UserComponent } from './pages/user/user.component';
 import { TodosComponent } from './todos/todos.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -29,7 +28,6 @@ import { CookieService } from 'ngx-cookie-service';
     FavoriteTasksComponent,
     DeletedTasksComponent,
     ErrorpageComponent,
-    UserComponent,
     TodosComponent,
     RegisterComponent,
   ],

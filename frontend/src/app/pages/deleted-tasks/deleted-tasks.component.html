@@ -7,7 +7,7 @@
            <h6 class="mb-0">Task title</h6>
            <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
          </div>
-         <small class="opacity-50 text-nowrap">Deleted ?</small>
+         <small class="opacity-50 text-nowrap">Do you want to get it back ?</small>
        </div>
      </a>
      <div *ngFor="let task of tasks" [ngStyle]="{'display':task == undefined ? 'none' : 'block' }">
@@ -17,7 +17,7 @@
         <div>
           <p class="mb-0">{{task.todo || "Complete login function"}}</p>
         </div>
-        <small class="opacity-50 text-nowrap">{{task.isDeleted}}</small>
+        <button class="btn btn-success fs-2" (click)="undoDelete(task._id)"><i class="bi bi-recycle"></i></button>
       </div>
     </a>
   </div>

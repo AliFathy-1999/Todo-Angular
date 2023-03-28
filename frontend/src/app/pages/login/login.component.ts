@@ -18,8 +18,6 @@ export class LoginComponent implements OnInit {
     email:new FormControl('' , [Validators.required , Validators.email]),
     password:new FormControl('' , [Validators.required])
   })
-  name:string="";
-  quote:string="";
   errorMessage:string="";
   constructor(public _global:GlobalService,public _router:Router,private cookieService: CookieService){
     _global.navbar=false;
@@ -28,15 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  login(name:string,quote:string){
-    const userData : User = {
-      name:name,
-      quote:quote,
-    }
-    this._global.isLoggedIn = true;
-    this._router.navigate(['/todos'])
 
-  }
   onSubmit(form: FormGroup) {
     this._global.login(form.value).subscribe((user:any) => {
       this.cookieService.set('token', user.token);

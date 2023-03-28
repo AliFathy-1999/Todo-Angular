@@ -18,12 +18,10 @@ export class RegisterComponent {
   }
   onSubmit(){
     this._global.register(this.user).subscribe(user => {
-      console.log("Registered Successfully");
-
       this._router.navigate(['/login']);
     },(err:Error)=>{
       console.log(err.message);
-      this.errorMessage = err.message;
+      this.errorMessage = "Error, please try to registar again";
     })
   }
 

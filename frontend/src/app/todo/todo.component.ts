@@ -58,10 +58,6 @@ export class TodoComponent implements OnInit{
       location.reload()
     })
   }
-  sendTaskData(id:number){
-    //this._global.task =  this.todos.find(todo => todo.id == id);
-  }
-
   gotoSingleTask(id:any){
        this._router.navigate(["/task",id])
   }

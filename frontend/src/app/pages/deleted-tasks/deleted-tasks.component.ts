@@ -21,4 +21,13 @@ export class DeletedTasksComponent implements OnInit{
       this.ngOnInit()
     })
   }
+  undoDelete(id:number){
+
+    this._global.unDeleteTask(id).subscribe((task:any) =>{
+      this.ngOnInit();
+    },(err:Error) => {
+      console.log(err.message);
+
+    })
+  }
 }

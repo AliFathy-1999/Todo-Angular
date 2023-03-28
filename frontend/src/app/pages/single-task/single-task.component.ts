@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 
@@ -7,13 +7,17 @@ import { GlobalService } from 'src/app/services/global.service';
   templateUrl: './single-task.component.html',
   styleUrls: ['./single-task.component.css']
 })
-export class SingleTaskComponent {
+export class SingleTaskComponent implements OnInit{
   id:number;
   task:any
 
   constructor(private _activited: ActivatedRoute,private _global:GlobalService){
     _global.navbar = true ; _global.footer = true ;
     this.id =  this._activited.snapshot.params['id']
-    this.task = this._global.task
+  }
+  ngOnInit(): void {
+    this._global.getSingleTask(this.id).subscribe((task:any) =>{
+      this.task= task;
+    })
   }
 }
